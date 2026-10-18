@@ -156,7 +156,7 @@ typedef enum
 #define X6100_R25(cmplevel, cmpe)	(X6100_FIELD(cmplevel, 0, 0xF) | X6100_FIELD(cmpe, 4, 0x1))
 
 //
-// AGC: register 27 knee/slope/hang, register 28 time constants in ms (new in 1.2.0)
+// AGC: register 27 knee/slope/hang, register 28 time constants in units of 10 ms (new in 1.2.0)
 //
 
 #define X6100_R27(knee, slope, hang)	(X6100_FIELD(knee, 0, 0xFF) | X6100_FIELD(slope, 8, 0xF) | X6100_FIELD(hang, 12, 0x1))

@@ -357,7 +357,7 @@ are marked **new** / **changed**.
 | 24 | [11:0] dnfcnt, [23:12] dnfwidth, [24] dnfe |
 | 25 | **[3:0] cmplevel (0 off, 1:2, 1:4, 1:8), [4] cmpe** |
 | 27 | [7:0] agcknee, [11:8] agcslope, [12] agchang |
-| 28 | **changed:** [9:0] agc_tcslow, [19:10] agc_tcmid, [29:20] agc_tcfast (ms) — was a single agctime |
+| 28 | **changed:** [9:0] agc_tcslow, [19:10] agc_tcmid, [29:20] agc_tcfast, unit 10 ms (defaults 250/50/5 = 2.5 s/0.5 s/50 ms) — was a single agctime |
 | 29 | monilevel |
 | 33 | [7:0] ks, [9:8] km, [11:10] kimb, [22:12] cwtone, [28:23] cwvol, [29] cwtrain |
 | 34 | [15:0] qsktime, [31:16] kr×10 |
@@ -376,6 +376,19 @@ Notes:
   (`wparam`), not applied autonomously by the STM32. A replacement firmware must load
   them from the 0xF000 block per band and write the registers itself.
 - Still unknown: 16, 18–19, 26, 30–32, 36–40, 52, 54 (never written by the UI → presumably unused).
+
+## 9. Hardware verification, libx6100 (2026-10-18)
+
+BASE 1.1.9, GUI stopped, own code only:
+
+| Test | Result |
+|------|--------|
+| status block, calibration read + CRC | ok |
+| flow frames, CRC | ok, 0 errors; ~27.5 frames/s (36 ms) with fftdec = 0, ~19/s under the R1CBU GUI |
+| register write (full + diff) | ok, no I2C errors |
+| RX 14.074 / 7.074 MHz USB | tuned, FT8 audible on speaker (rxvol 20) |
+| IQ level, no antenna / antenna | −97 dB / −58…−63 dB |
+| TX | not tested, blocked in tooling |
 
 ## Open items for a clean implementation
 
